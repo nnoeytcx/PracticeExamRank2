@@ -1,42 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcspn.c                                       :+:      :+:    :+:   */
+/*   alpha_mirror.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpoungla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/18 20:23:54 by tpoungla          #+#    #+#             */
-/*   Updated: 2023/07/26 14:28:10 by tpoungla         ###   ########.fr       */
+/*   Created: 2023/07/25 21:54:23 by tpoungla          #+#    #+#             */
+/*   Updated: 2023/07/25 22:05:00 by tpoungla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdio.h>
-#include <string.h>
 
-size_t	ft_strcspn(const char *s, const char *reject)
+int main(int argc, char *argv[])
 {
-	size_t	i = 0;
-	size_t	j;
+    int i;
+    char c;
 
-	while (s[i])
-	{
-		j = 0;
-		while (reject[j])
-		{
-			if (s[i] == reject[j])
-				return (i);
-			j++;
-		}
-		i++;
-	}
-	return (i);
-}
-
-int	main(void)
-{
-	char *str = "i know you well";
-	char *c = "you";
-	printf("%lu\n", strcspn(str, c));
-	printf("%lu", ft_strcspn(str, c));
+    i = 0;
+    if (argc == 2)
+    {
+        while (argv[1][i])
+        {
+            c = argv[1][i];
+            if (c >= 'a' && c <= 'z')
+                c = 122 + 97 - c;
+            else if (c >= 'A' && c <= 'Z')
+                c = 90 + 65 - c; 
+            write(1, &c, 1);
+            i++;
+        }
+    }
+    write(1, "\n", 1);
 }
